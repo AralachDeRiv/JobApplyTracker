@@ -21,6 +21,7 @@ const employerSchema = mongoose.Schema({
 const jobSchema = mongoose.Schema({
   jobTitle: {
     type: String,
+    required: [true, "Please enter a job title"],
   },
   website: {
     type: String,
@@ -64,6 +65,11 @@ const jobSchema = mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "user",
   },
+});
+
+jobSchema.post("save", function (doc, next) {
+  console.log("Job saved");
+  next();
 });
 
 const Job = mongoose.model("job", jobSchema);

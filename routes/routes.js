@@ -18,9 +18,13 @@ router.post("/signUp", uploadFields, register, (req, res) => {
 router.get("/user", (req, res) => {});
 router.patch("/user/:id", (req, res) => {});
 
+const { addJob } = require("../controllers/jobControllers");
 router.get("/job/:id", (req, res) => {});
-router.get("/job", (req, res) => {});
-router.post("/job", (req, res) => {});
+router.post("/job", addJob, (req, res) => {
+  res.send("ok");
+});
+const { getJobs } = require("../controllers/jobControllers");
+router.get("/job", getJobs, (req, res) => {});
 router.patch("/job/:id", (req, res) => {});
 
 router.get("/dashboard", (req, res) => {});

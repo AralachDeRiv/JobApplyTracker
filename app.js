@@ -29,7 +29,7 @@ app.use(Router);
 //     const user = await User.create({
 //       firstname: "John",
 //       lastname: "Doe",
-//       email: "john.doe@example.com",
+//       email: "john.77oe@example.com",
 //       profilPicture: "http://example.com/john.jpg",
 //       CVpdf: "http://example.com/john-cv.pdf",
 //       password: "securePassword123",

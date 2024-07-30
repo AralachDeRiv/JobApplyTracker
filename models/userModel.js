@@ -37,7 +37,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.post("save", function (doc, next) {
-  console.log("User have been saved");
+  console.log("Data have been saved");
   next();
 });
 
