@@ -8,8 +8,12 @@ router.post("/login", loginUser, (req, res) => {
   res.json("ok");
 });
 
+const { uploadFields } = require("../services/fileService");
+const { register } = require("../controllers/signup");
 router.get("/signUp", (req, res) => {});
-router.post("/signUp", (req, res) => {});
+router.post("/signUp", uploadFields, register, (req, res) => {
+  res.send("ok");
+});
 
 router.get("/user", (req, res) => {});
 router.patch("/user/:id", (req, res) => {});

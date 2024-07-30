@@ -4,7 +4,8 @@ const { handleErrors } = require("../services/errorsHandler");
 const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const result = await User.login(email, password);
+    const user = await User.login(email, password);
+    res.locals.username = user.fullname;
     next();
   } catch (err) {
     const errors = handleErrors(err);

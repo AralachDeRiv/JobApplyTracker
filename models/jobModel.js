@@ -60,12 +60,10 @@ const jobSchema = mongoose.Schema({
     type: String,
   },
 
-  jobSeeker: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "user",
-    },
-  ],
+  jobSeeker: {
+    type: mongoose.Types.ObjectId,
+    ref: "user",
+  },
 });
 
 const Job = mongoose.model("job", jobSchema);

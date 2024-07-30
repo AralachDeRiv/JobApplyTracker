@@ -61,7 +61,6 @@ app.use(Router);
 //       origin: "job offer",
 //       status: "Interested",
 //       comment: "Looking forward to discussing this opportunity.",
-//       jobSeeker: ["64c72f8f4f1a2b3c4d567890", "64c72f8f4f1a2b3c4d567891"],
 //     });
 //     console.log(result);
 //   } catch (err) {

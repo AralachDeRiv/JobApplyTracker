@@ -41,6 +41,10 @@ userSchema.post("save", function (doc, next) {
   next();
 });
 
+userSchema.virtual("fullname").get(function () {
+  return `${this.firstname} ${this.lastname}`;
+});
+
 userSchema.statics.login = async function (email, password) {
   const user = await this.findOne({ email });
   if (user) {
