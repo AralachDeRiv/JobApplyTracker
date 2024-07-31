@@ -8,15 +8,8 @@ const {
 
 const register = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, password } = req.body;
     let CVpdf = "";
     let profilPicture = "";
-    const user = await User.create({
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-    });
 
     if (req.files["CVpdf"]) {
       const resultCV = await uploadCVpdf(req.files["CVpdf"][0]["buffer"]);
@@ -31,12 +24,17 @@ const register = async (req, res, next) => {
       profilPicture = resultPictureProfile.secure_url;
     }
 
-    user.profilPicture = profilPicture;
-    user.CVpdf = CVpdf;
+    const { firstname, lastname, email, password } = req.body;
+    const user = await User.create({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+      profilPicture: profilPicture,
+      CVpdf: CVpdf,
+    });
 
-    user.save();
-
-    next();
+    res.json(user);
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json(errors);

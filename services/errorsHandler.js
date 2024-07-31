@@ -1,6 +1,10 @@
 const handleErrors = (err) => {
   let errors = {};
 
+  if (err["cloudinaryError"]) {
+    return err["cloudinaryError"];
+  }
+
   if (err.code == 11000) {
     errors.email = "This email already registered";
   }
@@ -24,4 +28,19 @@ const handleErrors = (err) => {
   return errors;
 };
 
-module.exports = { handleErrors };
+const multer = require("multer");
+
+const handleMulterErrors = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_UNEXPECTED_FILE") {
+      return res
+        .status(400)
+        .json({ fileFieldError: "Unexpected file field in request" });
+    }
+    // Gérer d'autres erreurs multer si nécessaire
+  }
+  // Passer à la gestion des erreurs suivante si ce n'est pas une erreur multer
+  next(err);
+};
+
+module.exports = { handleErrors, handleMulterErrors };
