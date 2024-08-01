@@ -78,13 +78,21 @@ const removeFileFromCloudinary = async (url) => {
 };
 
 const updateProfilePictureFromCloudinary = async (url, buffer) => {
-  await removeFileFromCloudinary(url);
+  try {
+    await removeFileFromCloudinary(url);
+  } catch (err) {
+    console.log(err);
+  }
   const result = await uploadProfilePicture(buffer);
   return result;
 };
 
 const updateCVFromCloudinary = async (url, buffer) => {
-  await removeFileFromCloudinary(url);
+  try {
+    await removeFileFromCloudinary(url);
+  } catch (err) {
+    console.log(err);
+  }
   const result = await uploadCVpdf(buffer);
   return result;
 };

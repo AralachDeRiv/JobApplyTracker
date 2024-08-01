@@ -1,22 +1,25 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/login", (req, res) => {});
 const { loginUser } = require("../controllers/login");
 router.post("/login", loginUser);
 
+// Pour post un nouveau user
 const { uploadFields } = require("../services/fileService");
 const { register } = require("../controllers/signup");
 const { handleMulterErrors } = require("../services/errorsHandler");
-router.get("/signUp", (req, res) => {});
 router.post("/signUp", uploadFields, handleMulterErrors, register);
 
-router.get("/user", (req, res) => {});
+// Plus tard pour un potentiel admin
+router.get("/users", (req, res) => {});
 
+// Routes pour le profile du user
 router.get("/profile/:id", (req, res) => {});
 const { updateProfile } = require("../controllers/updateProfile");
 router.patch("/profile", uploadFields, handleMulterErrors, updateProfile);
 
+// Retire les files mais et met à jours le porfil
+// user.CVpdf devient une chaine de caractères vide
 const {
   removePDFfromCloudinary,
   removeProfilePicturefromCloudinary,
@@ -34,7 +37,5 @@ router.get("/job/:id", getJob);
 router.get("/job", getJobs);
 router.post("/job", addJob);
 router.patch("/job", updateJob);
-
-router.get("/dashboard", (req, res) => {});
 
 module.exports = router;

@@ -30,14 +30,20 @@ const userSchema = mongoose.Schema({
   },
 });
 
+// très très moyen je sais :)
+function isArgon2Hash(hash) {
+  return typeof hash === "string" && hash.startsWith("$argon2");
+}
 // Hashage du mot de passe
 userSchema.pre("save", async function (next) {
-  this.password = await argon2.hash(this.password);
+  if (!isArgon2Hash(this.password)) {
+    this.password = await argon2.hash(this.password);
+  }
   next();
 });
 
 userSchema.post("save", function (doc, next) {
-  console.log("Data have been saved");
+  console.log("Data has been saved");
   next();
 });
 

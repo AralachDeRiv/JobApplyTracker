@@ -6,16 +6,24 @@ const {
   uploadProfilePicture,
 } = require("../services/fileService");
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   try {
+    const { firstname, lastname, email, password } = req.body;
+    const user = new User({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+    });
+
+    await User.validate(user);
+
     let CVpdf = "";
     let profilPicture = "";
 
     if (req.files["CVpdf"]) {
       const resultCV = await uploadCVpdf(req.files["CVpdf"][0]["buffer"]);
-
       CVpdf = resultCV.secure_url;
-      console.log(req.files["CVpdf"][0]["buffer"]);
     }
     if (req.files["pictureProfile"]) {
       const resultPictureProfile = await uploadProfilePicture(
@@ -24,18 +32,13 @@ const register = async (req, res, next) => {
       profilPicture = resultPictureProfile.secure_url;
     }
 
-    const { firstname, lastname, email, password } = req.body;
-    const user = await User.create({
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-      profilPicture: profilPicture,
-      CVpdf: CVpdf,
-    });
+    user.CVpdf = CVpdf;
+    user.profilPicture = profilPicture;
+    await user.save();
 
-    res.json(user);
+    res.redirect("/home");
   } catch (err) {
+    console.log(err.message);
     const errors = handleErrors(err);
     res.status(400).json(errors);
   }
