@@ -5,11 +5,11 @@ const User = require("../models/userModel");
 dotenv.config();
 const secretKey = process.env.jwt_secret_key;
 
-const requireAuth = (req, res, next) => {
+const requireAuth = async (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (token) {
-    jwt.verify(token, secretKey, (err, decodedToken) => {
+    jwt.verify(token, secretKey, async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         res.redirect("/login");

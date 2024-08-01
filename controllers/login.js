@@ -7,7 +7,6 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.login(email, password);
-    console.log(user);
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.redirect("/home");

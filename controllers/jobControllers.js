@@ -1,6 +1,7 @@
+const { json } = require("stream/consumers");
 const Job = require("../models/jobModel");
 const { handleErrors } = require("../services/errorsHandler");
-const { getIdFromToken } = require("../services/jwtToken");
+const { getIdFromToken, verifyToken } = require("../services/jwtToken");
 const mongoose = require("mongoose");
 
 const addJob = async (req, res) => {
@@ -49,7 +50,13 @@ const addJob = async (req, res) => {
 const getJobs = async (req, res) => {
   let { numPage, limit, ByStatus, orderedBy, desc } = req.query;
   const token = req.cookies.jwt;
-  const userId = getIdFromToken(token);
+  let userId;
+  try {
+    userId = getIdFromToken(token);
+  } catch (err) {
+    const errors = handleErrors(err);
+    return res.status(400).json(errors);
+  }
   const userObjectId = new mongoose.Types.ObjectId(userId);
 
   numPage = Number(numPage) || 1;
@@ -71,7 +78,6 @@ const getJobs = async (req, res) => {
   } else {
     sortCriteria[orderedBy] = direction;
   }
-  // tester
 
   let result = await Job.aggregate([
     {
@@ -112,6 +118,7 @@ const getJobs = async (req, res) => {
   res.json(result);
 };
 
+//
 const getJob = async (req, res) => {
   const { id } = req.query;
   try {
@@ -124,13 +131,21 @@ const getJob = async (req, res) => {
 
 const updateJob = async (req, res) => {
   try {
+    const token = req.cookies.jwt;
+    const userId = getIdFromToken(token);
     const { id } = req.query;
-    const updates = req.body;
-    const result = await Job.updateOne({ _id: id }, { $set: updates });
-    res.json(result);
+    const job = await Job.findById(id);
+
+    if (job.jobSeeker == userId) {
+      const updates = req.body;
+      const result = await Job.updateOne({ _id: id }, { $set: updates });
+      res.json(result);
+    } else {
+      res.status(400).json({ Error: "What are u doing here?" });
+    }
   } catch (err) {
     const errors = handleErrors(err);
-    res.json(errors);
+    res.status(400).json(errors);
   }
 };
 

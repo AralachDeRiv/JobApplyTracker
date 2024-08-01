@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const { requireAuth } = require("../middelwares/authMiddelware");
+
 const {
   getProfile,
   getLogin,
@@ -12,9 +14,9 @@ const {
 
 router.get("/login", getLogin);
 router.get("/signup", getSignUp);
-router.get("/profile", getProfile);
-router.get("/home", getHome);
-router.get("/jobDetails", getJobDetails);
-router.get("/addJob", getAddJob);
+router.get("/profile", requireAuth, getProfile);
+router.get("/home", requireAuth, getHome);
+router.get("/jobDetails", requireAuth, getJobDetails);
+router.get("/addJob", requireAuth, getAddJob);
 
 module.exports = router;

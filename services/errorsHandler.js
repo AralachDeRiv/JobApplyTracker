@@ -5,6 +5,10 @@ const handleErrors = (err) => {
     return err["cloudinaryError"];
   }
 
+  if (err.message == "jwt must be provided") {
+    errors.authentification = "Not authentifed";
+  }
+
   if (err.code == 11000) {
     errors.email = "This email already registered";
   }

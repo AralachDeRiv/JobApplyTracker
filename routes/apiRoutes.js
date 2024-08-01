@@ -13,7 +13,8 @@ const { handleMulterErrors } = require("../services/errorsHandler");
 router.post("/signUp", uploadFields, handleMulterErrors, register);
 
 // Routes pour le profile du user
-router.get("/profile/:id", (req, res) => {});
+const { getProfile } = require("../controllers/getProfile");
+router.get("/profile", getProfile);
 const { updateProfile } = require("../controllers/updateProfile");
 router.patch("/profile", uploadFields, handleMulterErrors, updateProfile);
 

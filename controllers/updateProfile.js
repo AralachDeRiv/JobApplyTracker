@@ -4,11 +4,14 @@ const {
   updateCVFromCloudinary,
   removeFileFromCloudinary,
 } = require("../services/fileService");
+const { getIdFromToken } = require("../services/jwtToken");
+
 const User = require("../models/userModel");
 
 const updateProfile = async (req, res) => {
   try {
-    const id = "66aa005807a11fe4afb965a5";
+    const token = req.cookies.jwt;
+    const id = getIdFromToken(token);
     const updates = req.body;
 
     // Si jamais on essaie d'envoyer autre chose qu'un file
@@ -47,36 +50,36 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const removePDFfromCloudinary = async (req, res, next) => {
-  const id = "66aa005807a11fe4afb965a5";
+const removePDFfromCloudinary = async (req, res) => {
   try {
+    const token = req.cookies.jwt;
+    const id = getIdFromToken(token);
     let user = await User.findById(id);
     url = user.CVpdf;
     const result = await removeFileFromCloudinary(url);
     user.CVpdf = "";
-    console.log(user);
     user.save();
     res.json(result);
   } catch (err) {
     const errors = handleErrors(err);
-    res.json(errors);
+    res.status(400).json(errors);
   }
 };
 
-const removeProfilePicturefromCloudinary = async (req, res, next) => {
-  const id = "66aa005807a11fe4afb965a5";
+const removeProfilePicturefromCloudinary = async (req, res) => {
   try {
+    const token = req.cookies.jwt;
+    const id = getIdFromToken(token);
     let user = await User.findById(id);
     url = user.profilPicture;
     const result = await removeFileFromCloudinary(url);
     user.profilPicture = "";
-    console.log(user);
     user.save();
-    console.log(user);
     res.json(result);
   } catch (err) {
+    console.log(err.message);
     const errors = handleErrors(err);
-    res.json(errors);
+    res.status(400).json(errors);
   }
 };
 
