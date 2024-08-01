@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const { handleErrors } = require("../services/errorsHandler");
+const { createToken, maxAge } = require("../services/jwtToken");
 
 const {
   uploadCVpdf,
@@ -9,14 +10,12 @@ const {
 const register = async (req, res) => {
   try {
     const { firstname, lastname, email, password } = req.body;
-    const user = new User({
+    const user = await User.create({
       firstname: firstname,
       lastname: lastname,
       email: email,
       password: password,
     });
-
-    await User.validate(user);
 
     let CVpdf = "";
     let profilPicture = "";
@@ -36,6 +35,8 @@ const register = async (req, res) => {
     user.profilPicture = profilPicture;
     await user.save();
 
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.redirect("/home");
   } catch (err) {
     console.log(err.message);

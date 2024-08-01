@@ -3,15 +3,14 @@ const router = express.Router();
 
 const { loginUser } = require("../controllers/login");
 router.post("/login", loginUser);
+const { logoutUser } = require("../controllers/logout");
+router.get("/logout", logoutUser);
 
 // Pour post un nouveau user
 const { uploadFields } = require("../services/fileService");
 const { register } = require("../controllers/signup");
 const { handleMulterErrors } = require("../services/errorsHandler");
 router.post("/signUp", uploadFields, handleMulterErrors, register);
-
-// Plus tard pour un potentiel admin
-router.get("/users", (req, res) => {});
 
 // Routes pour le profile du user
 router.get("/profile/:id", (req, res) => {});
@@ -27,6 +26,7 @@ const {
 router.delete("/CVpdf", removePDFfromCloudinary);
 router.delete("/profilePicture", removeProfilePicturefromCloudinary);
 
+// Routes pour job
 const {
   getJob,
   getJobs,

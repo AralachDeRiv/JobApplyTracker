@@ -1,8 +1,14 @@
 const Job = require("../models/jobModel");
 const { handleErrors } = require("../services/errorsHandler");
+const { getIdFromToken } = require("../services/jwtToken");
+const mongoose = require("mongoose");
 
-const addJob = async (req, res, next) => {
+const addJob = async (req, res) => {
   try {
+    const token = req.cookies.jwt;
+    const userId = getIdFromToken(token);
+    // console.log(userId);
+
     const {
       name,
       email,
@@ -14,7 +20,6 @@ const addJob = async (req, res, next) => {
       origin,
       status,
       comment,
-      jobSeeker,
     } = req.body;
 
     const job = await Job.create({
@@ -30,7 +35,7 @@ const addJob = async (req, res, next) => {
       origin,
       status,
       comment,
-      jobSeeker,
+      jobSeeker: userId,
     });
 
     res.json(job);
@@ -41,8 +46,11 @@ const addJob = async (req, res, next) => {
 };
 
 // http://localhost:3000/job?numPage=0&limit=3&asc=true&userid=12345&orderedBy=employer.name&ByStatus=Interested
-const getJobs = async (req, res, next) => {
+const getJobs = async (req, res) => {
   let { numPage, limit, ByStatus, orderedBy, desc } = req.query;
+  const token = req.cookies.jwt;
+  const userId = getIdFromToken(token);
+  const userObjectId = new mongoose.Types.ObjectId(userId);
 
   numPage = Number(numPage) || 1;
   limit = Number(limit) || 999;
@@ -63,10 +71,11 @@ const getJobs = async (req, res, next) => {
   } else {
     sortCriteria[orderedBy] = direction;
   }
+  // tester
 
   let result = await Job.aggregate([
     {
-      $match: {},
+      $match: { jobSeeker: userObjectId },
     },
     {
       $match: ByStatus,
@@ -103,7 +112,7 @@ const getJobs = async (req, res, next) => {
   res.json(result);
 };
 
-const getJob = async (req, res, next) => {
+const getJob = async (req, res) => {
   const { id } = req.query;
   try {
     const job = await Job.findById(id);
@@ -115,7 +124,7 @@ const getJob = async (req, res, next) => {
 
 const updateJob = async (req, res) => {
   try {
-    const id = "66a78e0c8edf52e18dbea404";
+    const { id } = req.query;
     const updates = req.body;
     const result = await Job.updateOne({ _id: id }, { $set: updates });
     res.json(result);
