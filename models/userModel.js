@@ -42,6 +42,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.pre("updateOne", async function (next) {
+  const update = this.getUpdate();
+  if (update.$set && update.$set.password) {
+    update.$set.password = await argon2.hash(update.$set.password);
+  }
+  next();
+});
+
 userSchema.post("save", function (doc, next) {
   console.log("Data has been saved");
   next();

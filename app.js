@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const apiRouter = require("./routes/apiRoutes");
 const viewsRouter = require("./routes/viewsRoutes");
@@ -21,6 +22,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static("public"));

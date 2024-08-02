@@ -1,4 +1,3 @@
-const { json } = require("stream/consumers");
 const Job = require("../models/jobModel");
 const { handleErrors } = require("../services/errorsHandler");
 const { getIdFromToken, verifyToken } = require("../services/jwtToken");
@@ -8,7 +7,6 @@ const addJob = async (req, res) => {
   try {
     const token = req.cookies.jwt;
     const userId = getIdFromToken(token);
-    // console.log(userId);
 
     const {
       name,
@@ -118,14 +116,15 @@ const getJobs = async (req, res) => {
   res.json(result);
 };
 
-//
+// Pour faciliter le front-end je render directement vers ejs
+//exemple  : http://localhost:3000/api/job?id=66ab5f02d4421eece6d983ad
 const getJob = async (req, res) => {
-  const { id } = req.query;
   try {
+    const { id } = req.query;
     const job = await Job.findById(id);
-    res.json(job);
+    res.render("jobDetails", { job });
   } catch (err) {
-    res.json(err);
+    res.status(400).json(err);
   }
 };
 
@@ -134,12 +133,14 @@ const updateJob = async (req, res) => {
     const token = req.cookies.jwt;
     const userId = getIdFromToken(token);
     const { id } = req.query;
+    console.log(id);
     const job = await Job.findById(id);
 
     if (job.jobSeeker == userId) {
       const updates = req.body;
       const result = await Job.updateOne({ _id: id }, { $set: updates });
-      res.json(result);
+      console.log(result);
+      res.json(job);
     } else {
       res.status(400).json({ Error: "What are u doing here?" });
     }

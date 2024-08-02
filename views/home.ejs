@@ -1,3 +1,28 @@
 <%- include("./partials/header") %>
 <p>home</p>
+<p>Metadata : <span id="numPage"></span>/<span id="totalPages"></span></p>
+<ol id="listOfJobs"></ol>
+
+<script>
+  const listOfJobs = document.getElementById("listOfJobs");
+  const numPage = document.getElementById("numPage");
+  const totalPages = document.getElementById("totalPages");
+  fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8")
+    .then((data) => data.json())
+    .then((data) => {
+      numPage.innerText = data.metaData.numPage;
+      totalPages.innerText = data.metaData.totalPages;
+
+      data.data.forEach((job) => {
+        let newNode = document.createElement("li");
+        newNode.innerText = job.jobTitle;
+        newNode.addEventListener("click", (e) => {
+          // Rediriger l'utilisateur
+          // à utiliser aussi après un update réussi
+          window.location.href = `/jobDetails?id=${job._id}`;
+        });
+        listOfJobs.appendChild(newNode);
+      });
+    });
+</script>
 <%- include('./partials/footer') %>

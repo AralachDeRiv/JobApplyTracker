@@ -1,3 +1,34 @@
 <%- include("./partials/header") %>
 <p>job details</p>
+
+<% if(job) { %>
+<p><%= job.jobTitle %></p>
+<% } %>
+
+<button id="testUpdate">click to test update</button>
+
+<script>
+  const testUpdate = document.getElementById("testUpdate");
+  // Pour récupérer l'id dans l'url
+  const url = new URL(window.location.href);
+  const queryParams = new URLSearchParams(url.search);
+  const id = queryParams.get("id");
+
+  testUpdate.addEventListener("click", (e) => {
+    let update = {
+      jobTitle: "a new Job",
+    };
+
+    fetch(`/api/job?id=${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(update),
+    })
+      .then((data) => (window.location.href = `/jobDetails?id=${id}`))
+      .catch((err) => console.log(err));
+  });
+</script>
+
 <%- include('./partials/footer') %>

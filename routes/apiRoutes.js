@@ -34,8 +34,8 @@ const {
   updateJob,
   addJob,
 } = require("../controllers/jobControllers");
-router.get("/job/:id", getJob);
-router.get("/job", getJobs);
+router.get("/job", getJob);
+router.get("/jobs", getJobs);
 router.post("/job", addJob);
 router.patch("/job", updateJob);
 
