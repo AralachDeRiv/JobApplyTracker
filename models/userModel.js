@@ -30,13 +30,9 @@ const userSchema = mongoose.Schema({
   },
 });
 
-// très très moyen je sais :)
-function isArgon2Hash(hash) {
-  return typeof hash === "string" && hash.startsWith("$argon2");
-}
 // Hashage du mot de passe
 userSchema.pre("save", async function (next) {
-  if (!isArgon2Hash(this.password)) {
+  if (this.isModified("password")) {
     this.password = await argon2.hash(this.password);
   }
   next();

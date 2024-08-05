@@ -7,7 +7,7 @@
   const listOfJobs = document.getElementById("listOfJobs");
   const numPage = document.getElementById("numPage");
   const totalPages = document.getElementById("totalPages");
-  fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8")
+  fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8&desc=true")
     .then((data) => data.json())
     .then((data) => {
       numPage.innerText = data.metaData.numPage;
