@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&family=Merienda:wght@300..900&display=swap');
+
+$primary-color : #47B8AB;
+$secondary-color: #030303;
+$third-color: #787878;
+$bg-color: #ffffff;
+
+.fira-sans-extralight {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.fira-sans-light {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.fira-sans-regular {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.fira-sans-medium {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.fira-sans-semibold {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.fira-sans-bold {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    @extend .fira-sans-medium;
+    background: $bg-color;
+}
+
+header {
+    background: $bg-color;
+    color: $secondary-color;
+    padding: 20px 0px;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+
+        img {
+            height: 50px;
+        }
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        position: relative;
+        flex-grow: 1;
+        justify-content: space-between;
+
+        .menu {
+            list-style: none;
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
+
+            .menu-item {
+                margin-left: 20px;
+
+                a {
+                    text-decoration: none;
+                    color: $secondary-color;
+                    transition: color 0.3s;
+
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+
+            .avatar {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .username {
+                color: $secondary-color;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 20px;
+
+            span {
+                background: $secondary-color;
+                border-radius: 2px;
+                height: 3px;
+                margin: 4px 0;
+                width: 25px;
+            }
+        }
+    }
+}
+
+footer {
+    background: $bg-color;
+    color: $secondary-color;
+    padding: 40px 0;
+
+    .container {
+        text-align: center;
+
+        p {
+            margin: 0;
+        }
+    }
+}
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
+    background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+    
+}
+.login-container {
+    background: $bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.login-form {
+    h1 {
+        color: $primary-color;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+
+        label {
+            color: $primary-color;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid $primary-color;
+            border-radius: 5px;
+            background: transparent;
+            color: $primary-color;
+            outline: none;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+                border-color: lighten($primary-color, 10%);
+            }
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            //display: none; // Change to block to show error messages
+        }
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: $primary-color;
+        color: $bg-color;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: lighten($primary-color, 10%);
+        }
+    }
+
+    p {
+        color: $third-color;
+        margin-top: 20px;
+
+        .register-link {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        padding: 20px;
+    }
+
+    .login-form {
+        .form-group {
+            input {
+                padding: 8px;
+            }
+        }
+
+        .login-button {
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        .menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #333;
+
+            .menu-item {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            &.active {
+                display: flex;
+            }
+        }
+
+        .menu-toggle {
+            display: flex;
+        }
+
+        .user-info {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&family=Merienda:wght@300..900&display=swap");
+.fira-sans-extralight {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.fira-sans-light {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.fira-sans-regular {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.fira-sans-medium, body {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.fira-sans-semibold {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.fira-sans-bold {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+}
+
+header {
+  background: #ffffff;
+  color: #030303;
+  padding: 20px 0px;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+header .logo {
+  font-size: 1.5rem;
+}
+header .logo img {
+  height: 50px;
+}
+header .nav {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+header .nav .menu {
+  list-style: none;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+header .nav .menu .menu-item {
+  margin-left: 20px;
+}
+header .nav .menu .menu-item a {
+  text-decoration: none;
+  color: #030303;
+  transition: color 0.3s;
+}
+header .nav .menu .menu-item a:hover {
+  color: #47B8AB;
+}
+header .nav .user-info {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+header .nav .user-info .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+header .nav .user-info .username {
+  color: #030303;
+}
+header .nav .menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: 20px;
+}
+header .nav .menu-toggle span {
+  background: #030303;
+  border-radius: 2px;
+  height: 3px;
+  margin: 4px 0;
+  width: 25px;
+}
+
+footer {
+  background: #ffffff;
+  color: #030303;
+  padding: 40px 0;
+}
+footer .container {
+  text-align: center;
+}
+footer .container p {
+  margin: 0;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 72vh;
+  background: linear-gradient(135deg, #6cc6bc, #399389);
+}
+
+.login-container {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+
+.login-form h1 {
+  color: #47B8AB;
+  margin-bottom: 20px;
+}
+.login-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.login-form .form-group label {
+  color: #47B8AB;
+  margin-bottom: 5px;
+  display: block;
+}
+.login-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #47B8AB;
+  border-radius: 5px;
+  background: transparent;
+  color: #47B8AB;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.login-form .form-group input:focus {
+  border-color: #6cc6bc;
+}
+.login-form .form-group .error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+.login-form .login-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #47B8AB;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.login-form .login-button:hover {
+  background: #6cc6bc;
+}
+.login-form p {
+  color: #787878;
+  margin-top: 20px;
+}
+.login-form p .register-link {
+  color: #47B8AB;
+  text-decoration: none;
+  font-weight: bold;
+}
+.login-form p .register-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+  }
+  .login-form .form-group input {
+    padding: 8px;
+  }
+  .login-form .login-button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 768px) {
+  .nav .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #333;
+  }
+  .nav .menu .menu-item {
+    margin: 10px 0;
+    text-align: center;
+  }
+  .nav .menu.active {
+    display: flex;
+  }
+  .nav .menu-toggle {
+    display: flex;
+  }
+  .nav .user-info {
+    display: none;
+  }
+}
