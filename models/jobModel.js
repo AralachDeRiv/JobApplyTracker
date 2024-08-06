@@ -55,6 +55,7 @@ const jobSchema = mongoose.Schema({
         ["Interested", "CV sent", "Interview", "negative"].includes(v),
       message: (prop) => `${prop.value} is not a valid option`,
     },
+    required:  [true, "Status is required"]
   },
 
   comment: {

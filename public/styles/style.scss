@@ -158,21 +158,23 @@ footer {
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
     
 }
-.login-container {
+.login-container , .add-job-container{
     background: $bg-color;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 450px;
+    min-height: 450px;
     padding: 40px;
+    margin: 30px 0px;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 350px;
+    max-width: 500px;
     text-align: center;
 }
 
-.login-form {
+.login-form, .add-job-form {
+    width: 100%;
     h1 {
         color: $primary-color;
         margin-bottom: 20px;
@@ -188,13 +190,13 @@ footer {
             display: block;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 10px;
             border: 2px solid $primary-color;
             border-radius: 5px;
             background: transparent;
-            color: $primary-color;
+            color: $secondary-color;
             outline: none;
             transition: border-color 0.3s ease;
 
@@ -211,7 +213,7 @@ footer {
         }
     }
 
-    .login-button {
+    .login-button, .add-job-button {
         width: 100%;
         padding: 10px;
         border: none;
