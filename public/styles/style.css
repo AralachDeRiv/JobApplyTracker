@@ -137,6 +137,13 @@ footer .container p {
   background: linear-gradient(135deg, #6cc6bc, #399389);
 }
 
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6cc6bc, #399389);
+}
+
 .login-container, .add-job-container {
   background: #ffffff;
   display: flex;
@@ -158,6 +165,10 @@ footer .container p {
 .login-form h1, .add-job-form h1 {
   color: #47B8AB;
   margin-bottom: 20px;
+}
+.login-form h3, .add-job-form h3 {
+  color: #47B8AB;
+  margin-top: 40px;
 }
 .login-form .form-group, .add-job-form .form-group {
   margin-bottom: 20px;
@@ -213,6 +224,70 @@ footer .container p {
   text-decoration: underline;
 }
 
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  min-height: 60vh;
+  margin: 50px 0px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  width: calc(25% - 20px);
+  min-width: 200px;
+  height: 200px;
+}
+.card h3 {
+  margin: 10px 0;
+}
+.card p {
+  color: #666666;
+}
+.card a {
+  color: #0056b3;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+.card .sticker {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+.card.negative .sticker {
+  background-color: #b74235;
+}
+.card.interested .sticker {
+  background-color: #d2c812;
+}
+.card.cv-sent .sticker {
+  background-color: #367f9a;
+}
+.card.interview .sticker {
+  background-color: #5a9e4a;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .card {
+    width: calc(100% - 20px);
+  }
+}
 @media (max-width: 768px) {
   .login-container {
     padding: 20px;

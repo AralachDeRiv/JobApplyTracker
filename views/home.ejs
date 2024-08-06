@@ -1,28 +1,66 @@
-<%- include("./partials/header") %>
-<p>home</p>
-<p>Metadata : <span id="numPage"></span>/<span id="totalPages"></span></p>
-<ol id="listOfJobs"></ol>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <%- include('./partials/header') %>
+    <div class="home-container">
+      <div class="dashboard" id="dashboard">
+        <!-- Cards will be dynamically inserted here -->
+      </div>
+    </div>
+    <p>Metadata: <span id="numPage"></span>/<span id="totalPages"></span></p>
+    <script>
+      // Function to create and append job cards
+      const createJobCard = (job) => {
+        const card = document.createElement("div");
+        card.className = `card ${job.status.toLowerCase().replace(" ", "-")}`;
 
-<script>
-  const listOfJobs = document.getElementById("listOfJobs");
-  const numPage = document.getElementById("numPage");
-  const totalPages = document.getElementById("totalPages");
-  fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8&desc=true")
-    .then((data) => data.json())
-    .then((data) => {
-      numPage.innerText = data.metaData.numPage;
-      totalPages.innerText = data.metaData.totalPages;
+        const sticker = document.createElement("div");
+        sticker.className = "sticker";
+        sticker.innerText = job.status;
 
-      data.data.forEach((job) => {
-        let newNode = document.createElement("li");
-        newNode.innerText = job.jobTitle;
-        newNode.addEventListener("click", (e) => {
-          // Rediriger l'utilisateur
-          // à utiliser aussi après un update réussi
-          window.location.href = `/jobDetails?id=${job._id}`;
+        const title = document.createElement("h3");
+        title.innerText = job.jobTitle;
+
+        const company = document.createElement("p");
+        company.innerText = job.employer.name;
+
+        const link = document.createElement("a");
+        link.href = `/jobDetails?id=${job._id}`;
+        link.innerText = "See more";
+
+        card.appendChild(sticker);
+        card.appendChild(title);
+        card.appendChild(company);
+        card.appendChild(link);
+
+        return card;
+      };
+
+      const listOfJobs = document.getElementById("listOfJobs");
+      const numPage = document.getElementById("numPage");
+      const totalPages = document.getElementById("totalPages");
+      const dashboard = document.getElementById("dashboard");
+
+      fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8&desc=true")
+        .then((response) => response.json())
+        .then((data) => {
+          numPage.innerText = data.metaData.numPage;
+          totalPages.innerText = data.metaData.totalPages;
+
+          data.data.forEach((job) => {
+            // Add job card to dashboard
+            const jobCard = createJobCard(job);
+            dashboard.appendChild(jobCard);
+          });
         });
-        listOfJobs.appendChild(newNode);
-      });
-    });
-</script>
-<%- include('./partials/footer') %>
+    </script>
+
+    <%- include('./partials/footer') %>
+  </body>
+</html>

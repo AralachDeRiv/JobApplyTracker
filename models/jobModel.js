@@ -43,7 +43,7 @@ const jobSchema = mongoose.Schema({
     type: String,
     validate: {
       validator: (v) => ["Candidature spontanée", "job offer"].includes(v),
-      message: (prop) => `${prop} is not a valid option`,
+      message: (prop) => `${prop.value} is not a valid option`,
     },
   },
 

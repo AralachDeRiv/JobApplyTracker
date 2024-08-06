@@ -5,6 +5,12 @@ $secondary-color: #030303;
 $third-color: #787878;
 $bg-color: #ffffff;
 
+
+$negative-color: #b74235;
+$interested-color: #d2c812;
+$cv-sent-color: #367f9a;
+$interview-color: #5a9e4a;
+
 .fira-sans-extralight {
     font-family: "Fira Sans", sans-serif;
     font-weight: 200;
@@ -158,6 +164,14 @@ footer {
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
     
 }
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+}
+
 .login-container , .add-job-container{
     background: $bg-color;
     display: flex;
@@ -179,7 +193,10 @@ footer {
         color: $primary-color;
         margin-bottom: 20px;
     }
-
+    h3 {
+        color: $primary-color;
+        margin-top: 40px;
+    }
     .form-group {
         margin-bottom: 20px;
         text-align: left;
@@ -242,6 +259,78 @@ footer {
                 text-decoration: underline;
             }
         }
+    }
+}
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    min-height: 60vh;
+    margin: 50px 0px;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    width: calc(25% - 20px); // Adjust for gap
+    min-width: 200px;
+    height: 200px;
+    h3 {
+        margin: 10px 0;
+    }
+
+    p {
+        color: #666666;
+    }
+
+    a {
+        color: #0056b3;
+        text-decoration: none;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .sticker {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        color: #ffffff;
+        font-size: 0.9rem;
+    }
+
+    &.negative .sticker {
+        background-color: $negative-color;
+    }
+
+    &.interested .sticker {
+        background-color: $interested-color;
+    }
+
+    &.cv-sent .sticker {
+        background-color: $cv-sent-color;
+    }
+
+    &.interview .sticker {
+        background-color: $interview-color;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: calc(100% - 20px);
     }
 }
 
