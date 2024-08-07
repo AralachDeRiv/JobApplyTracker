@@ -8,7 +8,13 @@ const employerSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    validate: [validator.isEmail, "This is not a valid email"],
+    validate: {
+      validator: function (v) {
+        return v === "" || validator.isEmail(v);
+      },
+      message: (props) => `${props.value} is not a valid email`,
+    },
+    default: "",
   },
   phoneNumber: {
     type: String,
@@ -25,7 +31,13 @@ const jobSchema = mongoose.Schema({
   },
   website: {
     type: String,
-    validate: [validator.isURL, "This is not a valid url"],
+    validate: {
+      validator: function (v) {
+        return v === "" || validator.isURL(v);
+      },
+      message: (props) => `${props.value} is not a valid URL`,
+    },
+    default: "",
   },
   employer: employerSchema,
 
@@ -55,7 +67,7 @@ const jobSchema = mongoose.Schema({
         ["Interested", "CV sent", "Interview", "negative"].includes(v),
       message: (prop) => `${prop.value} is not a valid option`,
     },
-    required:  [true, "Status is required"]
+    required: [true, "Status is required"],
   },
 
   comment: {
