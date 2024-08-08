@@ -137,11 +137,13 @@ footer .container p {
   background: linear-gradient(135deg, #6cc6bc, #399389);
 }
 
-.home-container {
+.main-home-container {
+  background: linear-gradient(135deg, #6cc6bc, #399389);
+}
+.main-home-container .home-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #6cc6bc, #399389);
 }
 
 .login-container, .add-job-container {
@@ -242,7 +244,7 @@ footer .container p {
   position: relative;
   width: calc(25% - 20px);
   min-width: 200px;
-  height: 200px;
+  height: 170px;
 }
 .card h3 {
   margin: 10px 0;
@@ -266,16 +268,61 @@ footer .container p {
   font-size: 0.9rem;
 }
 .card.negative .sticker {
-  background-color: #b74235;
+  background-color: #8d6561;
 }
 .card.interested .sticker {
-  background-color: #d2c812;
+  background-color: #dd718e;
 }
 .card.cv-sent .sticker {
-  background-color: #367f9a;
+  background-color: #64bfe0;
 }
 .card.interview .sticker {
-  background-color: #5a9e4a;
+  background-color: #74c263;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
+.search-container .job-results-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 30px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+.search-container .job-results-form label {
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+.search-container .job-results-form input, .search-container .job-results-form select {
+  width: 150px;
+  padding: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background: transparent;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.search-container .job-results-form input:focus, .search-container .job-results-form select:focus {
+  border-color: white;
+}
+.search-container .job-results-form .search {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #47B8AB;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.search-container .job-results-form .search:hover {
+  background: white;
 }
 
 @media (max-width: 768px) {

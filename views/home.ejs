@@ -8,14 +8,85 @@
   </head>
   <body>
     <%- include('./partials/header') %>
-    <div class="home-container">
-      <div class="dashboard" id="dashboard">
-        <!-- Cards will be dynamically inserted here -->
+    <div class="main-home-container">
+      <div class="search-container">
+        <form id="job-results-form" class="job-results-form">
+          <div class="form-group">
+            <label for="orderedBy">Filter By</label>
+            <select name="orderedBy" id="orderedBy">
+              <option value="" selected="selected">None</option>
+              <option value="employer.name">Employer name</option>
+              <option value="jobTitle">Job title</option>
+              <option value="website">Website</option>
+              <option value="expirationDate">Expiration date</option>
+              <option value="origin">Origin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ByStatus">By Status</label>
+            <select name="ByStatus" id="ByStatus">
+              <option value="" selected="selected">All</option>
+              <option value="Interested">Interested</option>
+              <option value="CV sent">CV sent</option>
+              <option value="Interview">Interview</option>
+              <option value="negative">Negative</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="desc">Order By</label>
+            <select name="desc" id="desc">
+              <option value="true">Desc</option>
+              <option value="false">Asc</option>
+            </select>
+          </div>
+          <button type="submit" class="search">Search</button>
+        </form>
+      </div>
+
+      <div class="home-container">
+        <div class="dashboard" id="dashboard">
+          <!-- Cards will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <div class="pagination">
+        <a id="prevPage" disabled>&lt; Previous</a>
+        <span id="pageNumbers"></span>
+        <a id="nextPage" disabled>Next &gt;</a>
       </div>
     </div>
+
     <p>Metadata: <span id="numPage"></span>/<span id="totalPages"></span></p>
+    
     <script>
-      // Function to create and append job cards
+      const dashboard = document.getElementById("dashboard");
+      const numPage = document.getElementById("numPage");
+      const totalPages = document.getElementById("totalPages");
+      const form = document.getElementById("job-results-form");
+      const prevPageButton = document.getElementById("prevPage");
+      const nextPageButton = document.getElementById("nextPage");
+      const pageNumbers = document.getElementById("pageNumbers");
+
+      let currentPage = 1;
+
+      const jobResults = async (o = "", s = "", d = "true", nbP = 1, lm = 8) => {
+        await fetch(`/api/jobs?orderedBy=${o}&ByStatus=${s}&desc=${d}&numPage=${nbP}&limit=${lm}`)
+          .then((response) => response.json())
+          .then((data) => {
+            dashboard.innerHTML = "";
+            numPage.innerText = data.metaData.numPage;
+            totalPages.innerText = data.metaData.totalPages;
+            currentPage = data.metaData.numPage;
+
+            data.data.forEach((job) => {
+              const jobCard = createJobCard(job);
+              dashboard.appendChild(jobCard);
+            });
+
+            updatePagination(data.metaData.numPage, data.metaData.totalPages);
+          });
+      };
+
       const createJobCard = (job) => {
         const card = document.createElement("div");
         card.className = `card ${job.status.toLowerCase().replace(" ", "-")}`;
@@ -42,23 +113,41 @@
         return card;
       };
 
-      const listOfJobs = document.getElementById("listOfJobs");
-      const numPage = document.getElementById("numPage");
-      const totalPages = document.getElementById("totalPages");
-      const dashboard = document.getElementById("dashboard");
+      const updatePagination = (current, total) => {
+        pageNumbers.innerHTML = "";
+        prevPageButton.disabled = current === 1;
+        nextPageButton.disabled = current === total;
 
-      fetch("/api/jobs?orderedBy=jobTitle&numPage=1&limit=8&desc=true")
-        .then((response) => response.json())
-        .then((data) => {
-          numPage.innerText = data.metaData.numPage;
-          totalPages.innerText = data.metaData.totalPages;
-
-          data.data.forEach((job) => {
-            // Add job card to dashboard
-            const jobCard = createJobCard(job);
-            dashboard.appendChild(jobCard);
+        for (let i = 1; i <= total; i++) {
+          const pageButton = document.createElement("a");
+          pageButton.innerText = i;
+          pageButton.disabled = i === current;
+          pageButton.addEventListener("click", () => {
+            jobResults(form.orderedBy.value, form.ByStatus.value, form.desc.value, i);
           });
-        });
+          pageNumbers.appendChild(pageButton);
+        }
+      };
+
+      jobResults();
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        currentPage = 1;
+        await jobResults(form.orderedBy.value, form.ByStatus.value, form.desc.value, currentPage);
+      });
+
+      prevPageButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+          jobResults(form.orderedBy.value, form.ByStatus.value, form.desc.value, currentPage - 1);
+        }
+      });
+
+      nextPageButton.addEventListener("click", () => {
+        if (currentPage < totalPages.innerText) {
+          jobResults(form.orderedBy.value, form.ByStatus.value, form.desc.value, currentPage + 1);
+        }
+      });
     </script>
 
     <%- include('./partials/footer') %>

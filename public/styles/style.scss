@@ -6,10 +6,10 @@ $third-color: #787878;
 $bg-color: #ffffff;
 
 
-$negative-color: #b74235;
-$interested-color: #d2c812;
-$cv-sent-color: #367f9a;
-$interview-color: #5a9e4a;
+$negative-color: #8d6561;
+$interested-color: #dd718e;
+$cv-sent-color: #64bfe0;
+$interview-color: #74c263;
 
 .fira-sans-extralight {
     font-family: "Fira Sans", sans-serif;
@@ -164,13 +164,15 @@ footer {
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
     
 }
-
-.home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-home-container {
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+    .home-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
 
 .login-container , .add-job-container{
     background: $bg-color;
@@ -279,7 +281,7 @@ footer {
     position: relative;
     width: calc(25% - 20px); // Adjust for gap
     min-width: 200px;
-    height: 200px;
+    height: 170px;
     h3 {
         margin: 10px 0;
     }
@@ -319,6 +321,57 @@ footer {
 
     &.interview .sticker {
         background-color: $interview-color;
+    }
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    height: 150px;
+
+    .job-results-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 30px;
+        margin: 0 auto;
+        max-width: 1200px;
+
+        label {
+            color: $bg-color;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 150px;
+            padding: 10px;
+            border: 2px solid $bg-color;
+            border-radius: 5px;
+            background: transparent;
+            color: $bg-color;
+            outline: none;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+                border-color: lighten($bg-color, 10%);
+            }
+        }
+
+    .search {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: $bg-color;
+        color: $primary-color;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: lighten($bg-color, 10%);
+        }
+    }
     }
 }
 
