@@ -9,12 +9,12 @@ const employerSchema = mongoose.Schema({
   email: {
     type: String,
     validate: {
-      validator: function (v) {
-        return v === "" || validator.isEmail(v);
+      validator: function (value) {
+        // If the field is not empty, validate the URL
+        return value === "" || validator.isEmail(value);
       },
-      message: (props) => `${props.value} is not a valid email`,
+      message: "This is not a valid email",
     },
-    default: "",
   },
   phoneNumber: {
     type: String,
@@ -32,12 +32,12 @@ const jobSchema = mongoose.Schema({
   website: {
     type: String,
     validate: {
-      validator: function (v) {
-        return v === "" || validator.isURL(v);
+      validator: function (value) {
+        // If the field is not empty, validate the URL
+        return value === "" || validator.isURL(value);
       },
-      message: (props) => `${props.value} is not a valid URL`,
+      message: "This is not a valid URL",
     },
-    default: "",
   },
   employer: employerSchema,
 
