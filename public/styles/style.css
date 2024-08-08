@@ -146,7 +146,9 @@ footer .container p {
   align-items: center;
 }
 
-.login-container, .add-job-container {
+.login-container,
+.add-job-container,
+.sign-up-container {
   background: #ffffff;
   display: flex;
   justify-content: center;
@@ -161,27 +163,42 @@ footer .container p {
   text-align: center;
 }
 
-.login-form, .add-job-form {
+.login-form,
+.add-job-form,
+.sign-up-form {
   width: 100%;
 }
-.login-form h1, .add-job-form h1 {
+.login-form h1,
+.add-job-form h1,
+.sign-up-form h1 {
   color: #47B8AB;
   margin-bottom: 20px;
 }
-.login-form h3, .add-job-form h3 {
+.login-form h3,
+.add-job-form h3,
+.sign-up-form h3 {
   color: #47B8AB;
   margin-top: 40px;
 }
-.login-form .form-group, .add-job-form .form-group {
+.login-form .form-group,
+.add-job-form .form-group,
+.sign-up-form .form-group {
   margin-bottom: 20px;
   text-align: left;
 }
-.login-form .form-group label, .add-job-form .form-group label {
+.login-form .form-group label,
+.add-job-form .form-group label,
+.sign-up-form .form-group label {
   color: #47B8AB;
   margin-bottom: 5px;
   display: block;
 }
-.login-form .form-group input, .login-form .form-group select, .add-job-form .form-group input, .add-job-form .form-group select {
+.login-form .form-group input,
+.login-form .form-group select,
+.add-job-form .form-group input,
+.add-job-form .form-group select,
+.sign-up-form .form-group input,
+.sign-up-form .form-group select {
   width: 100%;
   padding: 10px;
   border: 2px solid #47B8AB;
@@ -191,15 +208,30 @@ footer .container p {
   outline: none;
   transition: border-color 0.3s ease;
 }
-.login-form .form-group input:focus, .login-form .form-group select:focus, .add-job-form .form-group input:focus, .add-job-form .form-group select:focus {
+.login-form .form-group input:focus,
+.login-form .form-group select:focus,
+.add-job-form .form-group input:focus,
+.add-job-form .form-group select:focus,
+.sign-up-form .form-group input:focus,
+.sign-up-form .form-group select:focus {
   border-color: #6cc6bc;
 }
-.login-form .form-group .error-message, .add-job-form .form-group .error-message {
+.login-form .form-group .error-message,
+.add-job-form .form-group .error-message,
+.sign-up-form .form-group .error-message {
   color: red;
   font-size: 0.8rem;
   margin-top: 5px;
 }
-.login-form .login-button, .login-form .add-job-button, .add-job-form .login-button, .add-job-form .add-job-button {
+.login-form .login-button,
+.login-form .add-job-button,
+.login-form .sign-up-button,
+.add-job-form .login-button,
+.add-job-form .add-job-button,
+.add-job-form .sign-up-button,
+.sign-up-form .login-button,
+.sign-up-form .add-job-button,
+.sign-up-form .sign-up-button {
   width: 100%;
   padding: 10px;
   border: none;
@@ -210,19 +242,33 @@ footer .container p {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-.login-form .login-button:hover, .login-form .add-job-button:hover, .add-job-form .login-button:hover, .add-job-form .add-job-button:hover {
+.login-form .login-button:hover,
+.login-form .add-job-button:hover,
+.login-form .sign-up-button:hover,
+.add-job-form .login-button:hover,
+.add-job-form .add-job-button:hover,
+.add-job-form .sign-up-button:hover,
+.sign-up-form .login-button:hover,
+.sign-up-form .add-job-button:hover,
+.sign-up-form .sign-up-button:hover {
   background: #6cc6bc;
 }
-.login-form p, .add-job-form p {
+.login-form p,
+.add-job-form p,
+.sign-up-form p {
   color: #787878;
   margin-top: 20px;
 }
-.login-form p .register-link, .add-job-form p .register-link {
+.login-form p .register-link,
+.add-job-form p .register-link,
+.sign-up-form p .register-link {
   color: #47B8AB;
   text-decoration: none;
   font-weight: bold;
 }
-.login-form p .register-link:hover, .add-job-form p .register-link:hover {
+.login-form p .register-link:hover,
+.add-job-form p .register-link:hover,
+.sign-up-form p .register-link:hover {
   text-decoration: underline;
 }
 
@@ -298,7 +344,8 @@ footer .container p {
   color: #ffffff;
   margin-bottom: 5px;
 }
-.search-container .job-results-form input, .search-container .job-results-form select {
+.search-container .job-results-form input,
+.search-container .job-results-form select {
   width: 150px;
   padding: 10px;
   border: 2px solid #ffffff;
@@ -308,7 +355,8 @@ footer .container p {
   outline: none;
   transition: border-color 0.3s ease;
 }
-.search-container .job-results-form input:focus, .search-container .job-results-form select:focus {
+.search-container .job-results-form input:focus,
+.search-container .job-results-form select:focus {
   border-color: white;
 }
 .search-container .job-results-form .search {
@@ -323,6 +371,24 @@ footer .container p {
 }
 .search-container .job-results-form .search:hover {
   background: white;
+}
+
+.no-jobs-found {
+  font-style: italic;
+  color: #ffffff;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #ffffff;
+  padding-bottom: 30px;
+}
+.pagination #pageNumbers {
+  display: flex;
+  gap: 10px;
 }
 
 @media (max-width: 768px) {

@@ -37,7 +37,7 @@ const register = async (req, res) => {
 
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.redirect("/home");
+    res.json(user);
   } catch (err) {
     console.log(err.message);
     const errors = handleErrors(err);
