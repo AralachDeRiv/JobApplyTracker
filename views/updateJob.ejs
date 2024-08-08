@@ -13,6 +13,40 @@
         <input type="text" id="website" name="website" value="<%= job.website%>"/>
         <small class="error-message" id="website-error"></small>
       </div>
+      <div class="form-group">
+        <label for="origin">Origin</label>
+        <select name="origin" id="origin">
+          <option value="Candidature spontanée" <%= job.origin === "Candidature spontanée" ? "selected" : "" %>>Candidature spontanée</option>
+          <option value="job offer" <%= job.origin === "job offer" ? "selected" : "" %> >Job offer</option>
+        </select>
+        <small class="error-message" id="origin-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="status">Status *</label>
+        <select name="status" id="status" required>
+          <option value="Interested" <%= job.status === "Interested" ? "selected" : "" %>>Interested</option>
+          <option value="CV sent" <%= job.status === "CV sent" ? "selected" : "" %>>CV sent</option>
+          <option value="Interview" <%= job.status === "Interview" ? "selected" : "" %>>Interview</option>
+          <option value="negative" <%= job.status === "negative" ? "selected" : "" %>>Negative</option>
+        </select>
+        <small class="error-message" id="status-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration date</label>
+        <input
+          type="date"
+          id="expirationDate"
+          name="expirationDate"
+          value="<%= new Date(job.expirationDate).toISOString().slice(0, 10) %>"
+          min="<%-new Date().toJSON().slice(0, 10)%>"
+        />
+        <small class="error-message" id="expirationDate-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <input type="text" id="comment" name="comment" value="<%= job.comment%>"/>
+        <small class="error-message" id="comment-error"></small>
+      </div>
       <h3>Employer’s contact</h3>
       <div class="form-group">
         <label for="name">Name *</label>
@@ -34,41 +68,7 @@
         <input type="text" id="address" name="address" value="<%= job.employer.address%>"/>
         <small class="error-message" id="address-error"></small>
       </div>
-      <div class="form-group">
-        <label for="expirationDate">Expiration date</label>
-        <input
-          type="date"
-          id="expirationDate"
-          name="expirationDate"
-          value="<%= new Date(job.expirationDate).toISOString().slice(0, 10) %>"
-          min="<%-new Date().toJSON().slice(0, 10)%>"
-        />
-        <small class="error-message" id="expirationDate-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="origin">Origin</label>
-        <select name="origin" id="origin">
-          <option value="Candidature spontanée" <%= job.origin === "Candidature spontanée" ? "selected" : "" %>>Candidature spontanée</option>
-          <option value="job offer" <%= job.origin === "job offer" ? "selected" : "" %> >Job offer</option>
-        </select>
-        <small class="error-message" id="origin-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="status">Status *</label>
-        <select name="status" id="status" required>
-          <option value="Interested" <%= job.status === "Interested" ? "selected" : "" %>>Interested</option>
-          <option value="CV sent" <%= job.status === "CV sent" ? "selected" : "" %>>CV sent</option>
-          <option value="Interview" <%= job.status === "Interview" ? "selected" : "" %>>Interview</option>
-          <option value="negative" <%= job.status === "negative" ? "selected" : "" %>>Negative</option>
-        </select>
-        <small class="error-message" id="status-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="comment">Comment</label>
-        <input type="text" id="comment" name="comment" value="<%= job.comment%>"/>
-        <small class="error-message" id="comment-error"></small>
-      </div>
-      <button type="submit" class="add-job-button">Update job</button>
+      <button type="submit" class="add-job-button">Update</button>
     </form>
   </div>
 </div>

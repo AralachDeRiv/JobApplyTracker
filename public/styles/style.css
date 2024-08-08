@@ -386,6 +386,9 @@ footer .container p {
   color: #ffffff;
   padding-bottom: 30px;
 }
+.pagination a {
+  cursor: pointer;
+}
 .pagination #pageNumbers {
   display: flex;
   gap: 10px;

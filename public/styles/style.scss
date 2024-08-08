@@ -404,6 +404,10 @@ footer {
     color: $bg-color;
     padding-bottom: 30px;
 
+    a {
+        cursor: pointer;
+    }
+
     #pageNumbers {
         display: flex;
         gap: 10px;
