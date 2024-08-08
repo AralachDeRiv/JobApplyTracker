@@ -17,7 +17,7 @@ const { getProfile } = require("../controllers/getProfile");
 router.get("/profile", getProfile);
 const { updateProfile } = require("../controllers/updateProfile");
 router.patch("/profile", uploadFields, handleMulterErrors, updateProfile);
-
+//router.get("/updateProfile", getUpdateProfile); //do this but with job
 // Retire les files mais et met à jours le porfil
 // user.CVpdf devient une chaine de caractères vide
 const {

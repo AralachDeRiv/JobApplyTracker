@@ -41,8 +41,18 @@ const updateProfile = async (req, res) => {
         updates.profilPicture = profilPicture;
       }
     }
-    const updateResult = await User.updateOne({ _id: id }, { $set: updates });
-    res.json(updateResult);
+    const user = await User.findById(id);
+    console.log(updates);
+    console.log(Object.keys(updates));
+    
+    Object.keys(updates).forEach(key => {
+      user[key] = updates[key];
+    });
+    console.log(user);
+    await user.save();
+    
+    //const updateResult = await User.updateOne({ _id: id }, { $set: updates });
+    res.json(user);
   } catch (err) {
     console.log(err);
     const errors = handleErrors(err);

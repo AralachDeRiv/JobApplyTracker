@@ -16,7 +16,9 @@ const getJobDetails = async (req, res) => {
 const getAddJob = async (req, res) => {
   res.render("addJob.ejs");
 };
-
+const getUpdateProfileV = async (req, res) => {
+  res.render("updateProfile.ejs");
+};
 module.exports = {
   getProfile,
   getLogin,
@@ -24,4 +26,5 @@ module.exports = {
   getHome,
   getJobDetails,
   getAddJob,
+  getUpdateProfileV,
 };

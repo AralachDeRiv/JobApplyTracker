@@ -1,26 +1,37 @@
 <%- include("./partials/header") %>
 <div class="main-container">
   <div class="sign-up-container">
-    <form class="sign-up-form" id="sign-up-form">
-      <h1>Sign up</h1>
+    <form class="sign-up-form" id="update-profile-form">
+      <h1>Update profile</h1>
       <div class="form-group">
-        <label for="firstname">Firstname *</label>
-        <input type="text" id="firstname" name="firstname" required />
+        <label for="firstname">Firstname</label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          value="<%= user.firstname %>"
+        />
         <small class="error-message" id="firstname-error"></small>
       </div>
       <div class="form-group">
-        <label for="lastname">Lastname *</label>
-        <input type="text" id="lastname" name="lastname" required />
+        <label for="lastname">Lastname</label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          value="<%= user.lastname %>"
+        />
         <small class="error-message" id="lastname-error"></small>
       </div>
       <div class="form-group">
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" required />
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="<%= user.email %>" />
         <small class="error-message" id="email-error"></small>
       </div>
       <div class="form-group">
-        <label for="password">Password *</label>
-        <input type="password" id="password" name="password" required />
+        <label for="password">Password (New password)</label>
+        <input type="password" id="password" name="password" />
+        <small class="error-message" id="password-error"></small>
       </div>
       <div class="form-group">
         <label for="pictureProfile">Profile picture</label>
@@ -30,18 +41,19 @@
           name="pictureProfile"
           accept="image/png, image/jpeg"
         />
+        <small class="error-message" id="pictureProfile-error"></small>
       </div>
       <div class="form-group">
         <label for="CVpdf">Choose a CV</label>
         <input type="file" id="CVpdf" name="CVpdf" accept="image/*,.pdf" />
-        <small class="error-message" id="CVpdf"></small>
+        <small class="error-message" id="CVpdf-error"></small>
       </div>
-      <button type="submit" class="sign-up-button">Sign up</button>
+      <button type="submit" class="sign-up-button">Update</button>
     </form>
   </div>
 </div>
 <script>
-  const form = document.querySelector("#sign-up-form");
+  const form = document.querySelector("#update-profile-form");
   const smallTags = document.querySelectorAll("small");
 
   form.addEventListener("submit", (e) => {
@@ -50,10 +62,26 @@
     smallTags.forEach((small) => {
       small.innerText = "";
     });
-    
-    fetch("/api/signup", {
-      method: "POST",
-      body: formData,
+
+    let newFormData = new FormData();
+
+    for (let [key, value] of formData.entries()) {
+      if (key !== "password") {
+        newFormData.append(key, value);
+      }else if (formData.get("password")!== ""){
+        newFormData.append(key, value);
+      }
+    }
+    /*let body = {};
+    newFormData.forEach((value, key)=>{
+      body[key] = value;
+    });*/
+
+    console.log(formData);
+    fetch("/api/profile", {
+      method: "PATCH",
+      //headers: {"Content-Type": "application/json"},
+      body: newFormData,
     })
       .then((data) => data.json())
       .then((data) => {

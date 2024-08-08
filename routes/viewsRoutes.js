@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const Job = require("../models/jobModel");
 const { requireAuth } = require("../middelwares/authMiddelware");
 
 const {
@@ -10,6 +10,7 @@ const {
   getHome,
   getJobDetails,
   getAddJob,
+  getUpdateProfileV,
 } = require("../controllers/getViews");
 
 // Ici le getJob renvoie les data en +
@@ -22,5 +23,10 @@ router.get("/profile", requireAuth, getProfile);
 router.get("/home", requireAuth, getHome);
 router.get("/jobDetails", requireAuth, getJob);
 router.get("/addJob", requireAuth, getAddJob);
+router.get("/updateProfile", requireAuth, getUpdateProfileV);
+router.get("/updateJob/:id", async (req, res) => {
+  res.locals.job = await Job.findById(req.params.id);
+  res.render("updateJob");
+});
 
 module.exports = router;
