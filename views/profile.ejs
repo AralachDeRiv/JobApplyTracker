@@ -1,6 +1,26 @@
 <%- include("./partials/header") %>
-<p>profile</p>
-<%= user.email %>
-<br />
-<br />
+<div class="main-container">
+    <div class="profile-card">
+        <div class="card-content">
+          <div class="card-image">
+            <img src="<%= user.profilPicture %>" alt="Card Image">
+          </div>
+          <div class="card-info">
+            <div class="info-item">
+              <span class="info-title">Name</span>
+              <span class="info-value">John Doe</span>
+            </div>
+            <div class="info-item">
+              <span class="info-title">Email</span>
+              <span class="info-value">john.doe@example.com</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-buttons">
+          <a href="/updateProfile">Update profile</a>
+          <a href="#">Download CV</a>
+        </div>
+      </div>
+      
+</div>
 <%- include('./partials/footer') %>

@@ -1,11 +1,32 @@
 <%- include("./partials/header") %>
-<p>job details</p>
-
-<% if(job) { %>
-<p><%= job.jobTitle %></p>
-<% } %>
-
-<button id="testUpdate">click to test update</button>
+<div class="main-container">
+  <div class="job-info-container">
+    <div class="job-title">
+        <h1>Frontend Dev.</h1>
+    </div>
+    <div class="job-details">
+        <p><strong>Company:</strong> Microsoft</p>
+        <p><strong>Website:</strong> <a href="https://www.microsoft.be/jobs" target="_blank">https://www.microsoft.be/jobs</a></p>
+    </div>
+    <hr />
+    <div class="employer-contact">
+        <h2>Contact of the employer</h2>
+        <p><strong>Name:</strong> Jean Dupont</p>
+        <p><strong>Email:</strong> <a href="mailto:jean.dupont@microsoft.be">jean.dupont@microsoft.be</a></p>
+        <p><strong>Phone:</strong> 0467 937590</p>
+        <p><strong>Address:</strong> Chée. de Bruxelles, 36 - 1150</p>
+    </div>
+    <hr />
+    <div class="application-status">
+        <h2>Candidature spontanée</h2>
+        <p><strong>Status:</strong> CV sent</p>
+        <p><strong>Comment:</strong> I prefer backend. But let’s see how it goes...</p>
+    </div>
+    <div class="update-button">
+        <button id="testUpdate">Update</button>
+    </div>
+  </div>
+</div>
 
 <script>
   const testUpdate = document.getElementById("testUpdate");
@@ -15,19 +36,7 @@
   const id = queryParams.get("id");
 
   testUpdate.addEventListener("click", (e) => {
-    let update = {
-      jobTitle: "Ingener",
-    };
-
-    fetch(`/api/job?id=${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(update),
-    })
-      .then((data) => (window.location.href = `/jobDetails?id=${id}`))
-      .catch((err) => console.log(err));
+    window.location.href = `/updateJob/${id}`;
   });
 </script>
 
