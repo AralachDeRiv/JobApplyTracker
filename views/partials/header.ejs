@@ -25,7 +25,7 @@
           <% if(user){ %>
           <div class="user-info">
             <a href="/profile">
-              <img src="<%= user.profilPicture %> %>" alt="Avatar" class="avatar" />
+              <img src="<%= user.profilPicture ? user.profilPicture : '../images/default-avatar.png'%> %>" alt="Avatar" class="avatar" />
               <span class="username"><%= user.fullname %></span>
             </a>
           </div>

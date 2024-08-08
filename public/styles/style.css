@@ -475,7 +475,7 @@ footer .container p {
 .job-info-container {
   background: #ffffff;
   padding: 30px;
-  max-width: 600px;
+  width: 450px;
   margin: 20px auto;
   border-radius: 8px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);

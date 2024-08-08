@@ -105,7 +105,7 @@
         const data = await response.json();
     
         if (data._id) {
-          window.location.href = `/home`; // Redirect to home page if successful
+          window.location.href = `/jobDetails/?id=${id}`; // Redirect to job details page if successful
         } else {
           // Handle validation errors
           Object.keys(data).forEach((key) => {

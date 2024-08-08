@@ -87,7 +87,7 @@
       .then((data) => {
         console.log(data);
         if (data._id) {
-          window.location.href = `/home`;
+          window.location.href = `/profile`;
         } else {
           Object.keys(data).forEach((key) => {
             document.querySelector(`#${key}-error`).innerText = data[key];
