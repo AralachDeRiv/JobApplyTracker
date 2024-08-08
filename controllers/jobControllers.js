@@ -133,22 +133,30 @@ const updateJob = async (req, res) => {
     const token = req.cookies.jwt;
     const userId = getIdFromToken(token);
     const { id } = req.query;
-    console.log(id);
+
+    // Find the job by ID
     const job = await Job.findById(id);
 
-    if (job.jobSeeker == userId) {
-      const updates = req.body;
-      const result = await Job.updateOne({ _id: id }, { $set: updates });
-      console.log(result);
+    // Check if the job belongs to the logged-in user
+    if (job.jobSeeker.toString() === userId) {
+      // Apply updates manually
+      Object.assign(job, req.body);
+
+      // Save the updated job
+      await job.save();
+
+      // Send the updated job back as the response
       res.json(job);
     } else {
-      res.status(400).json({ Error: "What are u doing here?" });
+      res.status(400).json({ Error: "You are not authorized to update this job." });
     }
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json(errors);
   }
 };
+
+
 
 module.exports = {
   addJob,
