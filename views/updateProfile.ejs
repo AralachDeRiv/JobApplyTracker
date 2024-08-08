@@ -68,7 +68,7 @@
     for (let [key, value] of formData.entries()) {
       if (key !== "password") {
         newFormData.append(key, value);
-      }else if (formData.get("password")!== ""){
+      } else if (formData.get("password") !== "") {
         newFormData.append(key, value);
       }
     }

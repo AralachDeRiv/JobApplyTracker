@@ -13,6 +13,41 @@
         <input type="text" id="website" name="website" />
         <small class="error-message" id="website-error"></small>
       </div>
+
+      <div class="form-group">
+        <label for="origin">Origin</label>
+        <select name="origin" id="origin">
+          <option value="Candidature spontanée">Candidature spontanée</option>
+          <option value="job offer">Job offer</option>
+        </select>
+        <small class="error-message" id="origin-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="status">Status *</label>
+        <select name="status" id="status" required>
+          <option value="Interested">Interested</option>
+          <option value="CV sent">CV sent</option>
+          <option value="Interview">Interview</option>
+          <option value="negative">Negative</option>
+        </select>
+        <small class="error-message" id="status-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration date</label>
+        <input
+          type="date"
+          id="expirationDate"
+          name="expirationDate"
+          value="<%-new Date().toJSON().slice(0, 10)%>"
+          min="<%-new Date().toJSON().slice(0, 10)%>"
+        />
+        <small class="error-message" id="expirationDate-error"></small>
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <input type="text" id="comment" name="comment" />
+        <small class="error-message" id="comment-error"></small>
+      </div>
       <h3>Employer’s contact</h3>
       <div class="form-group">
         <label for="name">Name *</label>
@@ -33,40 +68,6 @@
         <label for="address">Address</label>
         <input type="text" id="address" name="address" />
         <small class="error-message" id="address-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="expirationDate">Expiration date</label>
-        <input
-          type="date"
-          id="expirationDate"
-          name="expirationDate"
-          value="<%-new Date().toJSON().slice(0, 10)%>"
-          min="<%-new Date().toJSON().slice(0, 10)%>"
-        />
-        <small class="error-message" id="expirationDate-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="origin">Origin</label>
-        <select name="origin" id="origin">
-          <option value="Candidature spontanée">Candidature spontanée</option>
-          <option value="job offer">Job offer</option>
-        </select>
-        <small class="error-message" id="origin-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="status">Status *</label>
-        <select name="status" id="status" required>
-          <option value="Interested">Interested</option>
-          <option value="CV sent">CV sent</option>
-          <option value="Interview">Interview</option>
-          <option value="negative">Negative</option>
-        </select>
-        <small class="error-message" id="status-error"></small>
-      </div>
-      <div class="form-group">
-        <label for="comment">Comment</label>
-        <input type="text" id="comment" name="comment" />
-        <small class="error-message" id="comment-error"></small>
       </div>
       <button type="submit" class="add-job-button">Add</button>
     </form>
