@@ -162,19 +162,51 @@ footer {
         }
     }
 }
-
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 72vh;
-    background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+    min-height: 70vh;
+}
+.main-container ,.main-home-container{
 
+    //background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+        background: #47B8AB url('../images/tumblr-green.png') repeat 0 0;
+        -webkit-animation: 100s linear 0s normal none infinite animate;
+        -moz-animation: 100s linear 0s normal none infinite animate;
+        -ms-animation: 100s linear 0s normal none infinite animate;
+        -o-animation: 100s linear 0s normal none infinite animate;
+        animation: 100s linear 0s normal none infinite animate;
+     
+    }
+     
+    @-webkit-keyframes animate {
+        from {background-position:0 0;}
+        to {background-position: 500px 0;}
+    }
+     
+    @-moz-keyframes animate {
+        from {background-position:0 0;}
+        to {background-position: 500px 0;}
+    }
+     
+    @-ms-keyframes animate {
+        from {background-position:0 0;}
+        to {background-position: 500px 0;}
+    }
+     
+    @-o-keyframes animate {
+        from {background-position:0 0;}
+        to {background-position: 500px 0;}
+    }
+     
+    @keyframes animate {
+        from {background-position:0 0;}
+        to {background-position: 500px 0;}
+    
 }
 
 .main-home-container {
-    background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
-
     .home-container {
         display: flex;
         justify-content: center;
