@@ -156,16 +156,19 @@ footer {
         }
     }
 }
+
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 72vh;
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
-    
+
 }
+
 .main-home-container {
     background: linear-gradient(135deg, lighten($primary-color, 10%), darken($primary-color, 10%));
+
     .home-container {
         display: flex;
         justify-content: center;
@@ -174,7 +177,9 @@ footer {
 }
 
 
-.login-container , .add-job-container{
+.login-container,
+.add-job-container,
+.sign-up-container {
     background: $bg-color;
     display: flex;
     justify-content: center;
@@ -189,16 +194,21 @@ footer {
     text-align: center;
 }
 
-.login-form, .add-job-form {
+.login-form,
+.add-job-form,
+.sign-up-form {
     width: 100%;
+
     h1 {
         color: $primary-color;
         margin-bottom: 20px;
     }
+
     h3 {
         color: $primary-color;
         margin-top: 40px;
     }
+
     .form-group {
         margin-bottom: 20px;
         text-align: left;
@@ -209,7 +219,8 @@ footer {
             display: block;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 10px;
             border: 2px solid $primary-color;
@@ -232,7 +243,9 @@ footer {
         }
     }
 
-    .login-button, .add-job-button {
+    .login-button,
+    .add-job-button,
+    .sign-up-button {
         width: 100%;
         padding: 10px;
         border: none;
@@ -263,6 +276,7 @@ footer {
         }
     }
 }
+
 .dashboard {
     display: flex;
     flex-wrap: wrap;
@@ -282,6 +296,7 @@ footer {
     width: calc(25% - 20px); // Adjust for gap
     min-width: 200px;
     height: 170px;
+
     h3 {
         margin: 10px 0;
     }
@@ -343,7 +358,8 @@ footer {
             margin-bottom: 5px;
         }
 
-        input, select {
+        input,
+        select {
             width: 150px;
             padding: 10px;
             border: 2px solid $bg-color;
@@ -358,20 +374,39 @@ footer {
             }
         }
 
-    .search {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background: $bg-color;
-        color: $primary-color;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s ease;
+        .search {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: $bg-color;
+            color: $primary-color;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
 
-        &:hover {
-            background: lighten($bg-color, 10%);
+            &:hover {
+                background: lighten($bg-color, 10%);
+            }
         }
     }
+}
+
+.no-jobs-found {
+    font-style: italic;
+    color: $bg-color;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: $bg-color;
+    padding-bottom: 30px;
+
+    #pageNumbers {
+        display: flex;
+        gap: 10px;
     }
 }
 
