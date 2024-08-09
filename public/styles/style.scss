@@ -107,8 +107,7 @@ header {
                     }
                 }
             }
-
-            .hidden-nav-item {
+            .hidden-nav-item{
                 display: none;
             }
         }
@@ -635,7 +634,6 @@ footer {
     header .logo img {
         width: 200px;
     }
-
     .profile-card {
         width: calc(100% - 20px);
     }
@@ -645,7 +643,6 @@ footer {
     .nav {
         //display: inline !important;
         justify-content: end !important;
-
         .menu {
             visibility: hidden;
             //display: none !important;
@@ -658,7 +655,7 @@ footer {
             width: 180px;
             z-index: 2;
 
-            .hidden-nav-item {
+            .hidden-nav-item{
                 display: block !important;
             }
 
@@ -698,7 +695,6 @@ footer {
         padding: 8px;
         font-size: 0.8rem;
     }
-
     .dashboard {
         .card {
             width: 300px !important;
@@ -706,16 +702,14 @@ footer {
     }
 
     .search-container {
-        .form-group {
+        .form-group{
             width: 300px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 30px;
         }
-
         height: 350px;
-
         .job-results-form {
             display: grid !important;
         }
